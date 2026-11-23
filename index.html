@@ -195,7 +195,7 @@
             #hero {
                 font-family: 'Anteb', sans-serif;
                 margin: 0;
-                background: #ef6b22;
+                background: #0d2041;
                 overflow: hidden;
                 padding: 50px 0;
                 position: relative;
@@ -215,6 +215,16 @@
                 row-gap: 20px;
             }
 
+            #hero .container::before {
+                content: "";
+                position: absolute;
+                background: #ef6b22;
+                width: 200px;
+                height: 160px;
+                left: 0;
+                border-radius: 0 150px 150px 0;
+            }
+
             h1 {
                 font-size: 45px;
                 color: #ffffff;
@@ -226,13 +236,15 @@
             }
 
             h2 {
-                font-size: 25px;
+                font-size: 30px;
                 color: #ffffff;
                 font-weight: 400;
                 line-height: 1.1;
                 letter-spacing: -1px;
                 padding: 0 0px 10px 0;
                 margin: 0;
+                text-transform: uppercase;
+                font-style: italic;
             }
 
             .primary-content {
@@ -251,7 +263,6 @@
 
             .content-text {
                 color: #fff;
-                /* padding: 30px 0; */
             }
 
             .content-text p {
@@ -323,13 +334,12 @@
                 #hero .container>.client-confirmation {
                     grid-template-columns: 1fr 1fr;
                     margin-top: 0;
-                    
+
                 }
 
                 .primary-content {
-                    grid-template-columns: 0.7fr 1fr;
+                    grid-template-columns: 1fr 1fr;
                     height: fit-content;
-                    padding: 0 0 10px 0;
                 }
 
                 .image-wrapper {
@@ -343,7 +353,7 @@
                     position: relative;
                     text-align: center;
                     right: 0;
-                    padding: 20px 0 0 0;
+                    padding: 0;
                     font-size: 12px;
                 }
 
@@ -356,13 +366,13 @@
             <div class="primary-content">
                 <div class="content-image">
                     <div class="image-wrapper">
-                        <!-- <img src="assets/Scooter_elétrica_1.png" alt="Scooter elétrica" class="Scooter elétrica"> -->
-                        <img src="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/967f34e8-de45-4ae9-9c62-7b2208c363f8.png" alt="Scooter elétrica" class="Scooter elétrica">
+                        <img src="assets/Scooter_elétrica_2.webp" alt="Scooter elétrica" class="Scooter elétrica">
+                        <!-- <img src="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/967f34e8-de45-4ae9-9c62-7b2208c363f8.png" alt="Scooter elétrica" class="Scooter elétrica"> -->
                     </div>
 
                 </div>
                 <div class="content-text">
-                    <h2>Tente a sorte com a Crefaz no Festival Pé Vermelho!</h2>
+                    <h2>Tente a sorte <br> com a Crefaz <br>no <strong>Festival<br>Pé Vermelho!</strong></h2>
                     <h1>Preencha o formulário pra concorrer uma moto elétrica</h1>
                 </div>
 
@@ -433,16 +443,6 @@
                         padding: 0 0 10px 0;
                         pointer-events: none;
                     }
-
-                    /* select {
-                        appearance: none;
-                        -webkit-appearance: none;
-                        background-image: url(data:image/svg+xml;utf8,<svg fill="%23ef6b22" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>);
-                        background-repeat: no-repeat;
-                        background-position: right 14px center;
-                        background-size: 18px;
-                        padding-right: 42px;
-                    } */
 
                     input,
                     select {
@@ -932,7 +932,7 @@
 
                         </div>
 
-                        <button class="btn btn-primary" type="submit">Enviar</button>
+                        <button class="btn btn-secondary" type="submit">Enviar</button>
 
                         <p id="successMsg">
                             Enviado com sucesso!<strong> Em breve você receberá seu número da sorte.</strong>
@@ -1310,8 +1310,7 @@
                     }
 
                     .btn-confirmation {
-                        /* background: #edf2f4; */
-                        background: #ef6b22;
+                        background: transparent;
                         border: 2px solid;
                         display: flex;
                         align-items: center;
