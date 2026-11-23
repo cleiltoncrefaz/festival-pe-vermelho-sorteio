@@ -203,31 +203,55 @@
 
             #hero .container {
                 display: grid;
-                gap: 50px;
+                gap: 0px;
                 max-width: 1000px;
-                align-items: center;
+                align-items: start;
                 margin: 0 auto;
                 grid-template-columns: 1fr 0.8fr;
+                grid-template-areas:
+                    "intro form"
+                    "buttons form";
+                column-gap: 24px;
+                row-gap: 20px;
             }
 
             h1 {
-                font-size: 30px;
-                color: #ef6b22;
+                font-size: 45px;
+                color: #ffffff;
                 font-weight: 600;
                 line-height: 1.1;
                 letter-spacing: -1px;
-                padding: 0 30px 20px 0;
+                padding: 0;
                 margin: 0;
             }
-          
+
             h2 {
                 font-size: 25px;
                 color: #ffffff;
                 font-weight: 400;
                 line-height: 1.1;
                 letter-spacing: -1px;
-                padding: 0 30px 0 0;
+                padding: 0 0px 10px 0;
                 margin: 0;
+            }
+
+            .primary-content {
+                grid-area: intro;
+                position: relative;
+                display: grid;
+                grid-template-columns: 1fr;
+                align-items: center;
+                border-radius: 30px;
+            }
+
+            .content-image {
+                display: flex;
+                justify-content: center;
+            }
+
+            .content-text {
+                color: #fff;
+                /* padding: 30px 0; */
             }
 
             .content-text p {
@@ -235,46 +259,34 @@
                 padding: 0;
             }
 
-            .content-image {
-                position: relative;
-                display: grid;
-                grid-template-columns: 0.9fr 1fr;
-                align-items: center;
-                padding: 5px;
-                justify-content: center;
-                background: #163056;
-                border-radius: 30px;
-                height: 280px;
-            }
-
-            .content-text {
-                color: #fff;
-                padding: 30px 0;
-            }
-
-            .iphone {
+            .image-wrapper {
                 pointer-events: none;
-                position: absolute;
                 max-width: 350px;
-                top: -60px;
-                left: -40px;
             }
 
-            .content-form {
-                position: relative;
-                display: grid;
-            }
-
-
-            .iphone img {
+            .image-wrapper img {
                 width: 100%;
             }
 
+            .content-form {
+                grid-area: form;
+                position: relative;
+                display: grid;
+            }
+
+            #hero .container>.client-confirmation {
+                grid-area: buttons;
+                margin-top: 0;
+                align-self: start;
+                max-width: 500px;
+            }
+
             #certificateNumber {
-                transform: rotate(90deg);
+                transform: rotate(90deg) translateY(-50%);
                 color: #fff;
                 position: absolute;
                 right: 0;
+                top: 50%;
                 text-transform: uppercase;
             }
 
@@ -284,28 +296,46 @@
                     padding: 30px 0;
                 }
 
+                .content-text h1 {
+                    display: none;
+                }
+
                 h1 {
-                    font-size: 30px;
+                    font-size: 28px;
                     line-height: 1.1;
+                }
+
+                h2 {
+                    padding: 0;
                 }
 
                 #hero .container {
                     grid-template-columns: 1fr;
+                    grid-template-areas:
+                        "intro"
+                        "form"
+                        "buttons";
                     padding: 0 30px;
-                    gap: 0px;
+                    gap: 20px;
                 }
 
 
-                .content-image {
-                    grid-template-columns: 0.5fr 1fr;
+                #hero .container>.client-confirmation {
+                    grid-template-columns: 1fr 1fr;
+                    margin-top: 0;
+                    
+                }
+
+                .primary-content {
+                    grid-template-columns: 0.7fr 1fr;
                     height: fit-content;
-                    margin: 20px 0;
+                    padding: 0 0 10px 0;
                 }
 
-                .iphone {
-                    max-width: 150px;
+                .image-wrapper {
+                    max-width: 130px;
                     left: 0;
-                    top: -10px;
+                    top: -20px;
                 }
 
                 #certificateNumber {
@@ -323,18 +353,19 @@
         <div class="container">
             <!-- Sessao 1 -->
 
-            <div class="content-image">
-                <div class="content-iphone">
-                    <div class="iphone">
-                        <!-- <img src="Content Builder\Imagens\Scooter_elétrica.png" alt="iPhone 17" class="iPhone 17"> -->
-                        <img src="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/a2df0718-e203-4d4b-9361-2f4396adf53f.png" alt="iPhone 17" class="iPhone 17">
+            <div class="primary-content">
+                <div class="content-image">
+                    <div class="image-wrapper">
+                        <!-- <img src="assets/Scooter_elétrica_1.png" alt="Scooter elétrica" class="Scooter elétrica"> -->
+                        <img src="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/967f34e8-de45-4ae9-9c62-7b2208c363f8.png" alt="Scooter elétrica" class="Scooter elétrica">
                     </div>
 
                 </div>
                 <div class="content-text">
                     <h2>Tente a sorte com a Crefaz no Festival Pé Vermelho!</h2>
+                    <h1>Preencha o formulário pra concorrer uma moto elétrica</h1>
                 </div>
-             
+
             </div>
 
 
@@ -349,13 +380,23 @@
                         font-family: 'Anteb', sans-serif;
                         height: fit-content;
                         max-width: 500px;
+                        position: relative;
                     }
 
-                    .form-box h2 {
-                        font-size: 24px;
-                        color: #163056;
-                        font-weight: 600;
-                        letter-spacing: -0.3px;
+                    .form-box::before {
+                        content: "";
+                        width: 30px;
+                        height: 30px;
+                        position: absolute;
+                        background: #fff;
+                        border-radius: 7px 0px 0 0;
+                        left: 0;
+                        top: 50%;
+                        transform: rotate(315deg) translateY(-50%);
+                    }
+
+                    .form-box h1 {
+                        display: none;
                     }
 
                     .input-group {
@@ -566,6 +607,19 @@
                             max-width: 100%;
                         }
 
+                        .form-box h1 {
+                            display: block;
+                            color: #ef6b22;
+                            padding: 0 0 20px 0;
+                        }
+
+                        .form-box::before {
+                            border-radius: 7px 0px 0 0;
+                            left: 50%;
+                            top: 0;
+                            transform: rotate(45deg) translateX(-50%);
+                        }
+
                         .input-group label,
                         .input-group input {
                             font-size: 16px;
@@ -600,7 +654,8 @@
                         <input type="hidden" name="submitted" value="true">
                         <div class="input-group">
                             <label for="nome">Nome completo<span class="required-asterisk">*</span></label>
-                            <input type="text" id="nome" name="nome" placeholder="Ex: João da Silva" maxlength="100" required="">
+                            <input type="text" id="nome" name="nome" placeholder="Ex: João da Silva" maxlength="100"
+                                required="">
                         </div>
 
                         <div class="input-group">
@@ -611,19 +666,22 @@
 
                         <div class="input-group">
                             <label for="cpf">CPF<span class="required-asterisk">*</span></label>
-                            <input type="text" id="cpf" name="cpf" placeholder="(000.000.000-00)" maxlength="14" required="">
+                            <input type="text" id="cpf" name="cpf" placeholder="(000.000.000-00)" maxlength="14"
+                                required="">
                             <p id="cpfError" class="field-error">CPF inválido. Verifique e tente novamente.</p>
                         </div>
 
                         <div class="input-group">
                             <label for="celular">WhatsApp<span class="required-asterisk">*</span></label>
-                            <input type="tel" id="celular" name="celular" maxlength="15" placeholder="(00) 00000-0000" required="">
+                            <input type="tel" id="celular" name="celular" maxlength="15" placeholder="(00) 00000-0000"
+                                required="">
                             <p id="whatsappError" class="field-error">Digite um WhatsApp válido.</p>
                         </div>
 
                         <div class="input-group">
                             <label for="birthdate">Data de nascimento<span class="required-asterisk">*</span></label>
-                            <input type="text" id="birthdate" name="00NbJ00000EVAo0" placeholder="DD/MM/AAAA" maxlength="10" required="">
+                            <input type="text" id="birthdate" name="00NbJ00000EVAo0" placeholder="DD/MM/AAAA"
+                                maxlength="10" required="">
                             <p id="birthdateError" class="field-error">Informe uma data válida.</p>
                         </div>
 
@@ -1238,83 +1296,85 @@
                         });
                     </script>
                 </div>
-                <div class="client-confirmation">
-                    <style>
-                        .client-confirmation {
-                            display: grid;
-                            grid-template-columns: 1fr 1fr;
-                            gap: 12px;
-                            margin-top: 20px;
-                        }
 
-                        .btn-confirmation {
-                            /* background: #edf2f4; */
-                            background: #ef6b22;
-                            border: 2px solid;
-                            display: flex;
-                            align-items: center;
-                            justify-content: space-between;
-                            gap: 16px;
-                            font-size: 16px;
-                            color: #fff;
-                            height: 65px;
-                            text-decoration: none;
-                        }
 
-                        .btn-confirmation:hover {
-                            background: #ffffff;
-                            color: #163056;
-                            border: 2px solid #fff;
-                        }
+            </div>
 
-                        .btn-confirmation:hover svg {
-                            fill: #163056;
-                        }
+            <div class="client-confirmation">
+                <style>
+                    .client-confirmation {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 12px;
+                        margin-top: 20px;
+                    }
 
-                        .btn-icon {
-                            width: 30px;
-                            fill: #fff;
-                        }
+                    .btn-confirmation {
+                        /* background: #edf2f4; */
+                        background: #ef6b22;
+                        border: 2px solid;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        gap: 16px;
+                        font-size: 16px;
+                        color: #fff;
+                        height: 65px;
+                        text-decoration: none;
+                    }
 
-                        @media (max-width: 768px) {
-                            .client-confirmation {
-                                grid-template-columns: 1fr;
-                            }
+                    .btn-confirmation:hover {
+                        background: #ffffff;
+                        color: #163056;
+                        border: 2px solid #fff;
+                    }
 
-                        }
-                    </style>
-                    <!-- <a href="#" id="btnRegulamento" class="btn btn-confirmation "> -->
-                    <a href="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/4b2e0723-d38c-44c7-97d1-5845b511bc72.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-confirmation ">
-                        Regulamento
-                        <svg class="btn-icon" id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50.83 50.85">
-                            <path d="M50.83,11.6c0-6.41-5.19-11.6-11.6-11.6H11.6C5.19,0,0,5.19,0,11.6v27.63c0,6.41,5.19,11.6,11.6,11.6h27.16c.1,0,.2.02.3.02.26,0,.51-.03.77-.05.23-.01.46-.02.68-.04.07,0,.13-.02.2-.03,5.58-.71,9.91-5.38,10.1-11.11,0-.09.01-.18.01-.28,0-.04,0-.07,0-.11V11.6ZM3.5,39.23V11.6C3.5,7.13,7.13,3.5,11.6,3.5h27.63c4.47,0,8.1,3.63,8.1,8.1v19.14c-.7-.69-1.49-1.32-2.38-1.83-1.85-1.07-3.87-1.58-5.87-1.58-4.06,0-8.02,2.11-10.19,5.88-.74,1.28-1.2,2.65-1.42,4.03h-15.94v3.5h15.91c.35,2.46,1.47,4.78,3.26,6.59H11.6c-4.47,0-8.1-3.63-8.1-8.1ZM40.12,47.28c-.12.02-.25.01-.38.03-.17.01-.34.03-.51.03h-.46c-1.34-.05-2.65-.41-3.82-1.09-1.91-1.1-3.28-2.88-3.85-5.01-.57-2.13-.28-4.36.82-6.27,1.47-2.55,4.22-4.13,7.16-4.13,1.44,0,2.86.38,4.12,1.11,3.94,2.28,5.3,7.34,3.02,11.28-1.28,2.21-3.51,3.69-6,4.04-.03,0-.07.01-.1.02ZM39.3,16.11H11.53v-3.5h27.77v3.5ZM27,28.42h-15.47v-3.5h15.47v3.5ZM45.73,39.09c0,.92-.36,1.79-1.01,2.44l-4.75,4.75-2.47-2.47,3.06-3.06h-6.97v-3.5h6.81l-2.9-2.86,2.47-2.47,4.75,4.75c.65.65,1.01,1.52,1.01,2.44Z"></path>
-                        </svg>
-                    </a>
-                    <!-- Script Botão Modal Regulamento-->
-                    <script>
+                    .btn-confirmation:hover svg {
+                        fill: #163056;
+                    }
 
-                        const btnRegulamento = document.getElementById("btnRegulamento");
+                    .btn-icon {
+                        width: 30px;
+                        fill: #fff;
+                    }
+                </style>
+                <!-- <a href="#" id="btnRegulamento" class="btn btn-confirmation "> -->
+                <a href="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/4b2e0723-d38c-44c7-97d1-5845b511bc72.pdf"
+                    target="_blank" rel="noopener noreferrer" class="btn btn-confirmation ">
+                    Regulamento
+                    <svg class="btn-icon" id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 50.83 50.85">
+                        <path
+                            d="M50.83,11.6c0-6.41-5.19-11.6-11.6-11.6H11.6C5.19,0,0,5.19,0,11.6v27.63c0,6.41,5.19,11.6,11.6,11.6h27.16c.1,0,.2.02.3.02.26,0,.51-.03.77-.05.23-.01.46-.02.68-.04.07,0,.13-.02.2-.03,5.58-.71,9.91-5.38,10.1-11.11,0-.09.01-.18.01-.28,0-.04,0-.07,0-.11V11.6ZM3.5,39.23V11.6C3.5,7.13,7.13,3.5,11.6,3.5h27.63c4.47,0,8.1,3.63,8.1,8.1v19.14c-.7-.69-1.49-1.32-2.38-1.83-1.85-1.07-3.87-1.58-5.87-1.58-4.06,0-8.02,2.11-10.19,5.88-.74,1.28-1.2,2.65-1.42,4.03h-15.94v3.5h15.91c.35,2.46,1.47,4.78,3.26,6.59H11.6c-4.47,0-8.1-3.63-8.1-8.1ZM40.12,47.28c-.12.02-.25.01-.38.03-.17.01-.34.03-.51.03h-.46c-1.34-.05-2.65-.41-3.82-1.09-1.91-1.1-3.28-2.88-3.85-5.01-.57-2.13-.28-4.36.82-6.27,1.47-2.55,4.22-4.13,7.16-4.13,1.44,0,2.86.38,4.12,1.11,3.94,2.28,5.3,7.34,3.02,11.28-1.28,2.21-3.51,3.69-6,4.04-.03,0-.07.01-.1.02ZM39.3,16.11H11.53v-3.5h27.77v3.5ZM27,28.42h-15.47v-3.5h15.47v3.5ZM45.73,39.09c0,.92-.36,1.79-1.01,2.44l-4.75,4.75-2.47-2.47,3.06-3.06h-6.97v-3.5h6.81l-2.9-2.86,2.47-2.47,4.75,4.75c.65.65,1.01,1.52,1.01,2.44Z">
+                        </path>
+                    </svg>
+                </a>
+                <!-- Script Botão Modal Regulamento-->
+                <script>
 
-                        function openModal(event) {
-                            event.preventDefault();
-                            modal.classList.add("show");
-                            modal.setAttribute("aria-hidden", "false");
-                        }
+                    const btnRegulamento = document.getElementById("btnRegulamento");
 
-                        if (btnRegulamento) {
-                            btnRegulamento.addEventListener("click", openModal);
-                        }
+                    function openModal(event) {
+                        event.preventDefault();
+                        modal.classList.add("show");
+                        modal.setAttribute("aria-hidden", "false");
+                    }
 
-                    </script>
-                    <a href="#" class="btn btn-confirmation" id="openList">
-                        Números da Sorte
+                    if (btnRegulamento) {
+                        btnRegulamento.addEventListener("click", openModal);
+                    }
 
-                        <svg class="btn-icon" id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.13 53.13">
-                            <path d="M51.84,23.94c.59-1.18,1.29-2.93,1.29-4.61,0-4.74-3.12-7.93-7.77-7.94h0c-1.56,0-3.42.7-5.39,1.78,1.08-1.97,1.78-3.83,1.78-5.39,0-2.17-.69-4.06-2.01-5.46-1.43-1.52-3.48-2.32-5.93-2.32-1.68,0-3.44.7-4.61,1.29-1.65.82-3.62.82-5.26,0-1.18-.59-2.93-1.29-4.61-1.29-4.74,0-7.93,3.12-7.94,7.77,0,1.56.7,3.43,1.78,5.39-1.97-1.08-3.83-1.78-5.39-1.78h0c-2.17,0-4.05.69-5.45,2.01-1.52,1.43-2.32,3.48-2.32,5.93,0,1.68.7,3.44,1.29,4.61.82,1.65.82,3.62,0,5.26-.59,1.18-1.29,2.93-1.29,4.61,0,4.74,3.12,7.93,7.77,7.94h0c1.56,0,3.42-.7,5.39-1.78-1.08,1.97-1.78,3.83-1.78,5.39,0,2.17.69,4.06,2.01,5.46,1.43,1.52,3.48,2.32,5.93,2.32,1.68,0,3.44-.7,4.61-1.29,1.65-.82,3.62-.82,5.26,0,1.18.59,2.93,1.29,4.61,1.29,4.74,0,7.93-3.12,7.94-7.77,0-1.56-.7-3.43-1.78-5.39,1.97,1.08,3.83,1.78,5.39,1.78h0c2.17,0,4.05-.69,5.45-2.01,1.52-1.43,2.32-3.48,2.32-5.93,0-1.68-.7-3.44-1.29-4.61-.82-1.65-.82-3.62,0-5.26h0ZM15.18,7.77c0-1.49.54-3.98,4.14-3.98.72,0,1.79.32,2.92.89,2.71,1.35,5.94,1.35,8.66,0,1.13-.57,2.19-.89,2.92-.89,1.4,0,2.46.38,3.17,1.12.81.86.97,2.02.97,2.85,0,3.35-6.4,11.02-11.26,15.98-.04.04-.09.08-.13.12-.04-.04-.08-.08-.12-.12-5.09-5.21-11.26-12.8-11.26-15.98h0ZM7.77,37.95c-1.49,0-3.98-.54-3.98-4.14,0-.72.32-1.79.89-2.92,1.35-2.71,1.35-5.94,0-8.66-.57-1.13-.89-2.19-.89-2.92,0-1.4.38-2.46,1.12-3.17.86-.81,2.02-.97,2.85-.97h0c3.35,0,11.01,6.4,15.98,11.26.04.04.09.09.13.13-.04.04-.08.08-.12.12-5.21,5.09-12.79,11.26-15.98,11.26h0ZM37.95,45.36c0,1.49-.54,3.98-4.14,3.98-.72,0-1.79-.32-2.92-.89-1.35-.68-2.84-1.01-4.33-1.01s-2.97.34-4.33,1.01c-1.13.57-2.19.89-2.92.89-1.4,0-2.46-.38-3.17-1.12-.81-.86-.97-2.02-.97-2.85,0-3.35,6.4-11.01,11.26-15.98.04-.04.09-.09.13-.12.04.04.08.08.12.12,5.09,5.21,11.26,12.8,11.26,15.98ZM48.45,30.9c.57,1.13.89,2.19.89,2.92,0,1.4-.38,2.46-1.12,3.17-.86.81-2.02.97-2.85.97h0c-3.35,0-11.01-6.4-15.98-11.26-.04-.04-.09-.09-.13-.13.04-.04.08-.08.12-.12,5.21-5.09,12.79-11.26,15.98-11.26,1.49,0,3.98.54,3.98,4.14,0,.72-.32,1.79-.89,2.92-1.35,2.71-1.35,5.94,0,8.66Z"></path>
-                        </svg>
-                    </a>
-                </div>
+                </script>
+                <a href="#" class="btn btn-confirmation" id="openList">
+                    Números da Sorte
 
+                    <svg class="btn-icon" id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 53.13 53.13">
+                        <path
+                            d="M51.84,23.94c.59-1.18,1.29-2.93,1.29-4.61,0-4.74-3.12-7.93-7.77-7.94h0c-1.56,0-3.42.7-5.39,1.78,1.08-1.97,1.78-3.83,1.78-5.39,0-2.17-.69-4.06-2.01-5.46-1.43-1.52-3.48-2.32-5.93-2.32-1.68,0-3.44.7-4.61,1.29-1.65.82-3.62.82-5.26,0-1.18-.59-2.93-1.29-4.61-1.29-4.74,0-7.93,3.12-7.94,7.77,0,1.56.7,3.43,1.78,5.39-1.97-1.08-3.83-1.78-5.39-1.78h0c-2.17,0-4.05.69-5.45,2.01-1.52,1.43-2.32,3.48-2.32,5.93,0,1.68.7,3.44,1.29,4.61.82,1.65.82,3.62,0,5.26-.59,1.18-1.29,2.93-1.29,4.61,0,4.74,3.12,7.93,7.77,7.94h0c1.56,0,3.42-.7,5.39-1.78-1.08,1.97-1.78,3.83-1.78,5.39,0,2.17.69,4.06,2.01,5.46,1.43,1.52,3.48,2.32,5.93,2.32,1.68,0,3.44-.7,4.61-1.29,1.65-.82,3.62-.82,5.26,0,1.18.59,2.93,1.29,4.61,1.29,4.74,0,7.93-3.12,7.94-7.77,0-1.56-.7-3.43-1.78-5.39,1.97,1.08,3.83,1.78,5.39,1.78h0c2.17,0,4.05-.69,5.45-2.01,1.52-1.43,2.32-3.48,2.32-5.93,0-1.68-.7-3.44-1.29-4.61-.82-1.65-.82-3.62,0-5.26h0ZM15.18,7.77c0-1.49.54-3.98,4.14-3.98.72,0,1.79.32,2.92.89,2.71,1.35,5.94,1.35,8.66,0,1.13-.57,2.19-.89,2.92-.89,1.4,0,2.46.38,3.17,1.12.81.86.97,2.02.97,2.85,0,3.35-6.4,11.02-11.26,15.98-.04.04-.09.08-.13.12-.04-.04-.08-.08-.12-.12-5.09-5.21-11.26-12.8-11.26-15.98h0ZM7.77,37.95c-1.49,0-3.98-.54-3.98-4.14,0-.72.32-1.79.89-2.92,1.35-2.71,1.35-5.94,0-8.66-.57-1.13-.89-2.19-.89-2.92,0-1.4.38-2.46,1.12-3.17.86-.81,2.02-.97,2.85-.97h0c3.35,0,11.01,6.4,15.98,11.26.04.04.09.09.13.13-.04.04-.08.08-.12.12-5.21,5.09-12.79,11.26-15.98,11.26h0ZM37.95,45.36c0,1.49-.54,3.98-4.14,3.98-.72,0-1.79-.32-2.92-.89-1.35-.68-2.84-1.01-4.33-1.01s-2.97.34-4.33,1.01c-1.13.57-2.19.89-2.92.89-1.4,0-2.46-.38-3.17-1.12-.81-.86-.97-2.02-.97-2.85,0-3.35,6.4-11.01,11.26-15.98.04-.04.09-.09.13-.12.04.04.08.08.12.12,5.09,5.21,11.26,12.8,11.26,15.98ZM48.45,30.9c.57,1.13.89,2.19.89,2.92,0,1.4-.38,2.46-1.12,3.17-.86.81-2.02.97-2.85.97h0c-3.35,0-11.01-6.4-15.98-11.26-.04-.04-.09-.09-.13-.13.04-.04.08-.08.12-.12,5.21-5.09,12.79-11.26,15.98-11.26,1.49,0,3.98.54,3.98,4.14,0,.72-.32,1.79-.89,2.92-1.35,2.71-1.35,5.94,0,8.66Z">
+                        </path>
+                    </svg>
+                </a>
             </div>
 
             <div id="certificateNumber">Certificado de autorização SPA/ME Nº 01.054580/2026</div>
@@ -1325,7 +1385,8 @@
             <div aria-labelledby="modalTitle" aria-modal="true" class="modal-box" role="dialog">
                 <div class="modal-header">
                     <h3 id="modalTitle">
-                        REGULAMENTO/PLANO DE OPERA&Ccedil;&Atilde;O DA PROMO&Ccedil;&Atilde;O</h3><button aria-label="Fechar modal" class="modal-close" id="closeModal" type="button">&times;</button>
+                        REGULAMENTO/PLANO DE OPERA&Ccedil;&Atilde;O DA PROMO&Ccedil;&Atilde;O</h3><button
+                        aria-label="Fechar modal" class="modal-close" id="closeModal" type="button">&times;</button>
                 </div>
                 <div class="modal-content">
                     <p>
@@ -1337,7 +1398,8 @@
                     <p>
                         1.1 - Empresa Mandat&aacute;ria:</p>
                     <p>
-                        Raz&atilde;o Social: CREFAZ SOCIEDADE DE CREDITO AO MICROEMPREENDEDOR E A EMPRESA DE PEQUENO PORTE
+                        Raz&atilde;o Social: CREFAZ SOCIEDADE DE CREDITO AO MICROEMPREENDEDOR E A EMPRESA DE PEQUENO
+                        PORTE
                         LTDA</p>
                     <p>
                         Endere&ccedil;o: DUQUE DE CAXIAS N&uacute;mero: 882 Complemento: BLOCO 02 ANDAR 03</p>
@@ -1368,7 +1430,8 @@
                     <p>
                         6.1.1 A promo&ccedil;&atilde;o &ldquo;Crefaz na Expoing&aacute;&rdquo; &eacute; uma
                         realiza&ccedil;&atilde;o da empresa CREFAZ SOCIEDADE DE CR&Eacute;DITO AO MICROEMPREENDEDOR E A
-                        EMPRESA DE PEQUENO PORTE S.A. (CREFAZ), pessoa jur&iacute;dica de direito privado, inscrita no CNPJ
+                        EMPRESA DE PEQUENO PORTE S.A. (CREFAZ), pessoa jur&iacute;dica de direito privado, inscrita no
+                        CNPJ
                         sob o n&ordm; 18.188.384/0001-83, estabelecida na Avenida Duque de Caxias, n&deg; 882, Torre 2,
                         3&ordm; andar, Zona 07, CEP 87.020-025, Maring&aacute;-PR, de agora em diante denominada
                         simplesmente CREFAZ ou promotora.</p>
@@ -1379,13 +1442,16 @@
                         informa&ccedil;&otilde;es cadastrais da presente campanha s&atilde;o utilizadas pela
                         mandat&aacute;ria para identifica&ccedil;&atilde;o de credenciado, encaminhamento de ofertas,
                         identifica&ccedil;&atilde;o de seu perfil de compra e consumo. Ap&oacute;s o per&iacute;odo da
-                        promo&ccedil;&atilde;o, o participante poder&aacute; solicitar a exclus&atilde;o dos dados pessoais
-                        da Base de Dados da CREFAZ pelo email <a data-fr-linked="true" href="mailto:expoinga@crefaz.com.br">expoinga@crefaz.com.br</a>.</p>
+                        promo&ccedil;&atilde;o, o participante poder&aacute; solicitar a exclus&atilde;o dos dados
+                        pessoais
+                        da Base de Dados da CREFAZ pelo email <a data-fr-linked="true"
+                            href="mailto:expoinga@crefaz.com.br">expoinga@crefaz.com.br</a>.</p>
                     <p>
                         6.1.3 Excluem-se da presente promo&ccedil;&atilde;o os produtos vedados pelo art. 10 do Decreto
                         70.951/1972, sendo estes: medicamentos, armas e muni&ccedil;&otilde;es, explosivos, fogos de
                         artif&iacute;cio ou de estampido, bebidas alco&oacute;licas (bebidas pot&aacute;veis com teor
-                        alco&oacute;lico superior a treze graus Gay Lussac), fumo e seus derivados e pelo art. 4&ordm; da
+                        alco&oacute;lico superior a treze graus Gay Lussac), fumo e seus derivados e pelo art. 4&ordm;
+                        da
                         Lei n&ordm; 11.265/2006 e da Resolu&ccedil;&atilde;o da Anvisa RDC n&ordm; 221, sendo estes:
                         f&oacute;rmulas infantis para lactentes e f&oacute;rmulas infantis de seguimento para lactentes,
                         f&oacute;rmulas de nutrientes apresentada ou indicada para rec&eacute;m-nascido de alto risco,
@@ -1399,79 +1465,102 @@
                         territ&oacute;rio nacional, que visitarem o Stand da Crefaz e a feira Expoing&aacute; 2026.</p>
                     <p>
                         6.2.2 Caber&aacute; exclusivamente ao interessado observar o cumprimento dos prazos de
-                        participa&ccedil;&atilde;o, cadastro, e demais condi&ccedil;&otilde;es previstas neste regulamento,
+                        participa&ccedil;&atilde;o, cadastro, e demais condi&ccedil;&otilde;es previstas neste
+                        regulamento,
                         n&atilde;o podendo a promotora, ou qualquer das f&aacute;bricas participantes, serem
-                        responsabilizadas pela impossibilidade de participa&ccedil;&atilde;o neste evento promocional por
+                        responsabilizadas pela impossibilidade de participa&ccedil;&atilde;o neste evento promocional
+                        por
                         algo relacionado aos procedimentos e prazos.</p>
                     <p>
                         6.3 COMO PARTICIPAR</p>
                     <p>
-                        6.3.1 Durante o per&iacute;odo de participa&ccedil;&atilde;o, o interessado dever&aacute; visitar o
+                        6.3.1 Durante o per&iacute;odo de participa&ccedil;&atilde;o, o interessado dever&aacute;
+                        visitar o
                         stand da Crefaz e a feira Expoing&aacute; 2026, acessar o site site.crefaz.com.br/expoinga e
-                        preencher o cadastro, informando os seguintes dados: (a) Nome Completo, (b) CPF e (c) Celular com
+                        preencher o cadastro, informando os seguintes dados: (a) Nome Completo, (b) CPF e (c) Celular
+                        com
                         DDD.</p>
                     <p>
                         6.3.2. Ao finalizar o cadastro de forma integral, com os dados corretos, o participante
                         receber&aacute; 1 (um) n&uacute;mero da sorte para concorrer ao pr&ecirc;mio da presente
                         promo&ccedil;&atilde;o.</p>
                     <p>
-                        6.3.3 A CREFAZ n&atilde;o se responsabiliza por cadastros realizados de maneira equivocada ou que
-                        utilize dados pessoais de terceiros, casos esses pass&iacute;veis de desclassifica&ccedil;&atilde;o.
+                        6.3.3 A CREFAZ n&atilde;o se responsabiliza por cadastros realizados de maneira equivocada ou
+                        que
+                        utilize dados pessoais de terceiros, casos esses pass&iacute;veis de
+                        desclassifica&ccedil;&atilde;o.
                         A Empresa tampouco se responsabiliza por casos que impossibilitem a gera&ccedil;&atilde;o de
                         n&uacute;meros da sorte, devendo o participante se atentar &agrave;s instru&ccedil;&otilde;es do
                         regulamento, conferir todos os dados informados, a fim de evitar a rejei&ccedil;&atilde;o de
                         participa&ccedil;&otilde;es com erros ou nulidades de n&uacute;meros da sorte.</p>
                     <p>
-                        6.3.4 Para consultar os n&uacute;meros da sorte em momento posterior ao cadastramento, o interessado
-                        dever&aacute; acessar o site site.crefaz.com.br /expoinga e consultar o arquivo disponibilizado pela
+                        6.3.4 Para consultar os n&uacute;meros da sorte em momento posterior ao cadastramento, o
+                        interessado
+                        dever&aacute; acessar o site site.crefaz.com.br /expoinga e consultar o arquivo disponibilizado
+                        pela
                         Empresa Promotora antes da data da Loteria Federal.</p>
                     <p>
-                        6.3.5 Caso os n&uacute;meros da sorte se esgotem antes do final do &uacute;ltimo per&iacute;odo de
-                        participa&ccedil;&atilde;o, &agrave;s 22:00 (Hor&aacute;rio de Bras&iacute;lia) do dia 17/05/2026, a
-                        participa&ccedil;&atilde;o ser&aacute; encerrada antecipadamente, sendo mantida a data do sorteio
+                        6.3.5 Caso os n&uacute;meros da sorte se esgotem antes do final do &uacute;ltimo per&iacute;odo
+                        de
+                        participa&ccedil;&atilde;o, &agrave;s 22:00 (Hor&aacute;rio de Bras&iacute;lia) do dia
+                        17/05/2026, a
+                        participa&ccedil;&atilde;o ser&aacute; encerrada antecipadamente, sendo mantida a data do
+                        sorteio
                         previsto nos itens e termos a seguir.</p>
                     <p>
                         P&aacute;gina 2 de 6</p>
                     <p>
                         6.4 PROTE&Ccedil;&Atilde;O DE DADOS PESSOAIS</p>
                     <p>
-                        6.4.1 Os participantes declaram-se cientes de que, com base nos itens II e V do artigo 7&ordm; da
+                        6.4.1 Os participantes declaram-se cientes de que, com base nos itens II e V do artigo 7&ordm;
+                        da
                         LGPD (L13.709/2018) seus dados pessoais coletados em decorr&ecirc;ncia de sua
                         participa&ccedil;&atilde;o nesta promo&ccedil;&atilde;o ser&atilde;o armazenados, tratados,
                         utilizados e compartilhados entre a empresa promotora, parceiros envolvidos na
                         realiza&ccedil;&atilde;o desta promo&ccedil;&atilde;o e com a autoridade fiscalizadora (SPA),
                         limitando-se esse compartilhamento aos dados estritamente necess&aacute;rios para a
-                        operacionaliza&ccedil;&atilde;o e divulga&ccedil;&atilde;o da pr&oacute;pria promo&ccedil;&atilde;o
-                        e entrega dos pr&ecirc;mios desta promo&ccedil;&atilde;o, al&eacute;m&nbsp;do cumprimento de deveres
+                        operacionaliza&ccedil;&atilde;o e divulga&ccedil;&atilde;o da pr&oacute;pria
+                        promo&ccedil;&atilde;o
+                        e entrega dos pr&ecirc;mios desta promo&ccedil;&atilde;o, al&eacute;m&nbsp;do cumprimento de
+                        deveres
                         legais pelas citadas empresas, observados sempre os limites da legisla&ccedil;&atilde;o
                         aplic&aacute;vel, e sem qualquer &ocirc;nus para a promotora e suas parceiras supracitadas.</p>
                     <p>
-                        6.4.2 Ademais, declaram-se devidamente informados de que a promotora poder&aacute;, ainda, realizar
-                        a forma&ccedil;&atilde;o de cadastro e/ou banco de dados com as informa&ccedil;&otilde;es coletadas
+                        6.4.2 Ademais, declaram-se devidamente informados de que a promotora poder&aacute;, ainda,
+                        realizar
+                        a forma&ccedil;&atilde;o de cadastro e/ou banco de dados com as informa&ccedil;&otilde;es
+                        coletadas
                         de acordo com o que disp&otilde;e o artigo 12 da Portaria SEAE/ME n&ordm; 7.638/2022, e,
-                        tamb&eacute;m para adequada realiza&ccedil;&atilde;o, divulga&ccedil;&atilde;o e conclus&atilde;o
+                        tamb&eacute;m para adequada realiza&ccedil;&atilde;o, divulga&ccedil;&atilde;o e
+                        conclus&atilde;o
                         desta promo&ccedil;&atilde;o e, quando assim o fizer, estar&aacute; tratando dados para o
                         cumprimento de dever legal.</p>
                     <p>
-                        6.4.3 As empresas parceiras, todavia, devolver&atilde;o &agrave; promotora os dados que porventura
+                        6.4.3 As empresas parceiras, todavia, devolver&atilde;o &agrave; promotora os dados que
+                        porventura
                         receberem em raz&atilde;o da realiza&ccedil;&atilde;o de tarefas em raz&atilde;o desta
                         promo&ccedil;&atilde;o, n&atilde;o lhes sendo permitida a manuten&ccedil;&atilde;o das referidas
                         informa&ccedil;&otilde;es, salvo se em cumprimento de obriga&ccedil;&atilde;o legal.</p>
                     <p>
-                        6.4.4 Ao participar da presente promo&ccedil;&atilde;o, os participantes concordam em fornecer seus
+                        6.4.4 Ao participar da presente promo&ccedil;&atilde;o, os participantes concordam em fornecer
+                        seus
                         dados &agrave; CREFAZ, e os contemplados concordam em fornecer, al&eacute;m de seus dados,
-                        tamb&eacute;m suas imagens, nos termos da Lei Geral de Prote&ccedil;&atilde;o de Dados (Lei n&ordm;
+                        tamb&eacute;m suas imagens, nos termos da Lei Geral de Prote&ccedil;&atilde;o de Dados (Lei
+                        n&ordm;
                         13.709/2018) pelo prazo de at&eacute; 1 (um) ano ap&oacute;s o t&eacute;rmino.</p>
                     <p>
                         6.4.5 Caso, por qualquer motivo, o participante deseje alterar seu cadastro ou cancelar o
-                        consentimento para o uso de seus dados, neste per&iacute;odo, poder&aacute; entrar em contato com a
-                        mandat&aacute;ria, no e-mail <a data-fr-linked="true" href="mailto:expoinga@crefaz.com.br">expoinga@crefaz.com.br</a>.</p>
+                        consentimento para o uso de seus dados, neste per&iacute;odo, poder&aacute; entrar em contato
+                        com a
+                        mandat&aacute;ria, no e-mail <a data-fr-linked="true"
+                            href="mailto:expoinga@crefaz.com.br">expoinga@crefaz.com.br</a>.</p>
                     <p>
                         6.4.6 Ao cancelar o consentimento para o uso de seus dados, o participante perde o direito de
                         concorrer aos pr&ecirc;mios da presente promo&ccedil;&atilde;o.<br>
                         <br>
                         6.4.7 A CREFAZ pode coletar (1) todas e quaisquer informa&ccedil;&otilde;es que sejam fornecidas
-                        pelo participante ao preencher o cadastro para participar da presente promo&ccedil;&atilde;o, nos
+                        pelo participante ao preencher o cadastro para participar da presente promo&ccedil;&atilde;o,
+                        nos
                         termos do regulamento, (2) todas e quaisquer informa&ccedil;&otilde;es que sejam fornecidas pelo
                         participante ao usufruir os benef&iacute;cios da promo&ccedil;&atilde;o, e (3) outras
                         informa&ccedil;&otilde;es volunt&aacute;ria ou involuntariamente fornecidas pelo participante
@@ -1482,14 +1571,20 @@
                         durante a execu&ccedil;&atilde;o da promo&ccedil;&atilde;o e toma as precau&ccedil;&otilde;es
                         necess&aacute;rias para mant&ecirc;-los em seguran&ccedil;a.</p>
                     <p>
-                        6.4.9 Os dados pessoais coletados dos participantes s&atilde;o armazenados e tratados pela CREFAZ
+                        6.4.9 Os dados pessoais coletados dos participantes s&atilde;o armazenados e tratados pela
+                        CREFAZ
                         com as seguintes finalidades: aproximar a CREFAZ de seus credenciados, conhecendo mais de suas
-                        prefer&ecirc;ncias e fornecendo um novo canal de comunica&ccedil;&atilde;o entre as partes; contatar
-                        os participantes para informar-lhes sobre (1) a opera&ccedil;&atilde;o da promo&ccedil;&atilde;o,
+                        prefer&ecirc;ncias e fornecendo um novo canal de comunica&ccedil;&atilde;o entre as partes;
+                        contatar
+                        os participantes para informar-lhes sobre (1) a opera&ccedil;&atilde;o da
+                        promo&ccedil;&atilde;o,
                         (2) eventuais mudan&ccedil;as nos termos da promo&ccedil;&atilde;o (3) o resultado da
-                        promo&ccedil;&atilde;o; aprimorar as iniciativas comerciais e promocionais da CREFAZ; desenvolver
-                        internamente uma an&aacute;lise sobre os interesses, comportamentos e localiza&ccedil;&atilde;o dos
-                        consumidores para compreender melhor suas prefer&ecirc;ncias pessoais com o intuito de aprimorar e
+                        promo&ccedil;&atilde;o; aprimorar as iniciativas comerciais e promocionais da CREFAZ;
+                        desenvolver
+                        internamente uma an&aacute;lise sobre os interesses, comportamentos e localiza&ccedil;&atilde;o
+                        dos
+                        consumidores para compreender melhor suas prefer&ecirc;ncias pessoais com o intuito de aprimorar
+                        e
                         customizar a sua experi&ecirc;ncia; classificar e agrupar informa&ccedil;&otilde;es de
                         participantes.</p>
                     <p>
@@ -1502,7 +1597,8 @@
                     <p>
                         8 - QUANTIDADE DE ELEMENTOS SORTE&Aacute;VEIS POR S&Eacute;RIE: 100.000</p>
                     <p>
-                        9 - APURA&Ccedil;&Atilde;O E DESCRI&Ccedil;&Atilde;O DE PR&Ecirc;MIOS:&nbsp; DATA: 26/05/2026 17:00
+                        9 - APURA&Ccedil;&Atilde;O E DESCRI&Ccedil;&Atilde;O DE PR&Ecirc;MIOS:&nbsp; DATA: 26/05/2026
+                        17:00
                     </p>
                     <p>
                         PER&Iacute;ODO DE PARTICIPA&Ccedil;&Atilde;O DA APURA&Ccedil;&Atilde;O: 07/05/2026 09:00 a
@@ -1510,21 +1606,27 @@
                     <p>
                         DATA DO SORTEIO DA LOTERIA FEDERAL: 23/05/2026</p>
                     <p>
-                        ENDERE&Ccedil;O DA APURA&Ccedil;&Atilde;O: Avenida Duque de Caxias N&Uacute;MERO: 882 COMPLEMENTO:
+                        ENDERE&Ccedil;O DA APURA&Ccedil;&Atilde;O: Avenida Duque de Caxias N&Uacute;MERO: 882
+                        COMPLEMENTO:
                         Torre 2, 3&ordm; andar BAIRRO: Zona 07</p>
                     <p>
                         MUNIC&Iacute;PIO: Maring&aacute; UF: PR CEP: 87020-025</p>
                     <p>
                         LOCAL DA APURA&Ccedil;&Atilde;O: Sede da Crefaz</p>
                     <p>
-                        <img alt="" data-assetid="63175" src="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/b9bec678-3cdd-4134-96b2-45db94722b93.png" style="padding: 0px; text-align: center; border: 0px solid transparent; height: auto; width: 100%;" width="1271"><br>
+                        <img alt="" data-assetid="63175"
+                            src="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/b9bec678-3cdd-4134-96b2-45db94722b93.png"
+                            style="padding: 0px; text-align: center; border: 0px solid transparent; height: auto; width: 100%;"
+                            width="1271"><br>
                         <br>
                         11 - FORMA DE APURA&Ccedil;&Atilde;O: Regra de Forma&ccedil;&atilde;o dos Elementos
-                        Sorte&aacute;veis S&Eacute;RIE: Ser&aacute; gerada uma s&eacute;rie &uacute;nica de n&uacute;mero 0.
+                        Sorte&aacute;veis S&Eacute;RIE: Ser&aacute; gerada uma s&eacute;rie &uacute;nica de
+                        n&uacute;mero 0.
                         ELEMENTO SORTE&Aacute;VEL: Ser&atilde;o gerados 100.000 Elementos sorte&aacute;veis de 00.000 a
                         99.999 por s&eacute;rie.<br>
                         <br>
-                        N&Uacute;MERO DA SORTE: Ser&aacute; formado por 6 n&uacute;meros, sendo que o primeiro n&uacute;mero
+                        N&Uacute;MERO DA SORTE: Ser&aacute; formado por 6 n&uacute;meros, sendo que o primeiro
+                        n&uacute;mero
                         corresponde &agrave; s&eacute;rie e os 5 &uacute;ltimos n&uacute;meros ao<br>
                         <br>
                         ELEMENTO SORTE&Aacute;VEL, conforme exemplo abaixo:<br>
@@ -1532,31 +1634,39 @@
                         Exemplo: 0/12.345 = 0 (s&eacute;rie); 12.345 (elemento sorte&aacute;vel).<br>
                         <br>
                         Dados do Sorteio da Loteria Federal: A apura&ccedil;&atilde;o de resultado da presente
-                        promo&ccedil;&atilde;o ocorrer&aacute; com base na Extra&ccedil;&atilde;o da Loteria Federal do dia
-                        23/05/2026. Caso a Extra&ccedil;&atilde;o da Loteria Federal n&atilde;o ocorra na ocorr&ecirc;ncia
+                        promo&ccedil;&atilde;o ocorrer&aacute; com base na Extra&ccedil;&atilde;o da Loteria Federal do
+                        dia
+                        23/05/2026. Caso a Extra&ccedil;&atilde;o da Loteria Federal n&atilde;o ocorra na
+                        ocorr&ecirc;ncia
                         dos dados previstos, por qualquer motivo, ser&aacute; considerado para efeitos de
                         apura&ccedil;&atilde;o do resultado a dados da Extra&ccedil;&atilde;o da Loteria Federal
                         subsequente.<br>
                         <br>
                         REGRA DE APURA&Ccedil;&Atilde;O DO ELEMENTO SORTE&Aacute;VEL<br>
                         <br>
-                        A defini&ccedil;&atilde;o do elemento sorte&aacute;vel se dar&aacute; a partir dos pr&ecirc;mios da
+                        A defini&ccedil;&atilde;o do elemento sorte&aacute;vel se dar&aacute; a partir dos pr&ecirc;mios
+                        da
                         Extra&ccedil;&atilde;o da Loteria Federal, lidos de cima para baixo, por meio da
                         combina&ccedil;&atilde;o das unidades simples do primeiro ao quinto pr&ecirc;mio.
                     </p>
                     <p>
-                        <img alt="" data-assetid="63180" src="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/225964f2-927b-40ff-9070-9366bc55f103.png" style="padding: 0px; text-align: center; border: 0px solid transparent; height: auto; width: 100%;" width="1259"><br>
+                        <img alt="" data-assetid="63180"
+                            src="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/225964f2-927b-40ff-9070-9366bc55f103.png"
+                            style="padding: 0px; text-align: center; border: 0px solid transparent; height: auto; width: 100%;"
+                            width="1259"><br>
                         N&uacute;mero da sorte contemplado:<br>
                         <br>
                         S&eacute;rie apurada seguida do elemento sorte&aacute;vel apurado.<br>
                         <br>
                         No exemplo anterior, o n&uacute;mero da classifica&ccedil;&atilde;o contemplado seria, portanto:
-                        0/51099 ou o n&uacute;mero da classifica&ccedil;&atilde;o imediatamente subsequente que tenha sido
+                        0/51099 ou o n&uacute;mero da classifica&ccedil;&atilde;o imediatamente subsequente que tenha
+                        sido
                         distribu&iacute;do.<br>
                         <br>
                         Regra de Apura&ccedil;&atilde;o dos Contemplados: (por Apura&ccedil;&atilde;o)<br>
                         <br>
-                        Para determina&ccedil;&atilde;o do primeiro participante contemplado, este dever&aacute; possuir o
+                        Para determina&ccedil;&atilde;o do primeiro participante contemplado, este dever&aacute; possuir
+                        o
                         &ldquo;N&uacute;mero da sorte&rdquo; que coincida exatamente com o &ldquo;N&uacute;mero da
                         sorte&rdquo;.<br>
                         <br>
@@ -1566,16 +1676,20 @@
                         <br>
                         Aproxima&ccedil;&atilde;o:<br>
                         <br>
-                        No caso de n&atilde;o ter sido distribu&iacute;do o &ldquo;N&uacute;mero da sorte&rdquo; apurado ou
-                        n&atilde;o atendido aos crit&eacute;rios de participa&ccedil;&atilde;o, a determina&ccedil;&atilde;o
+                        No caso de n&atilde;o ter sido distribu&iacute;do o &ldquo;N&uacute;mero da sorte&rdquo; apurado
+                        ou
+                        n&atilde;o atendido aos crit&eacute;rios de participa&ccedil;&atilde;o, a
+                        determina&ccedil;&atilde;o
                         do participante contemplado ser&aacute; o &ldquo;Elemento sorte&aacute;vel&rdquo; imediatamente
                         superior, dentro da mesma s&eacute;rie. Esgotando-se os n&uacute;meros imediatamente superiores,
                         dentro da mesma s&eacute;rie, procure-se-&aacute; os n&uacute;meros imediatamente inferiores,
-                        at&eacute; que se encontre um &ldquo;Elemento sorte&aacute;vel&rdquo; v&aacute;lido para &nbsp;ser
+                        at&eacute; que se encontre um &ldquo;Elemento sorte&aacute;vel&rdquo; v&aacute;lido para
+                        &nbsp;ser
                         contemplado.<br>
                         <br>
                         Caso n&atilde;o tenha sido distribu&iacute;do nenhum elemento sorte&aacute;vel na s&eacute;rie
-                        apurada, o valor correspondente ao pr&ecirc;mio ser&aacute; recolhido, pela empresa Promotora, ao
+                        apurada, o valor correspondente ao pr&ecirc;mio ser&aacute; recolhido, pela empresa Promotora,
+                        ao
                         Tesouro Nacional, como renda da Uni&atilde;o, na forma da Lei.<br>
                         <br>
                         Distribui&ccedil;&atilde;o dos n&uacute;meros da sorte:<br>
@@ -1598,11 +1712,13 @@
                         e) C&ocirc;njuges e pais (pai, m&atilde;e, filhos e irm&atilde;os) de s&oacute;cios da Empresa
                         Promotora (Crefaz);<br>
                         <br>
-                        f) Funcion&aacute;rios e colaboradores que prestem servi&ccedil;os de forma direta &agrave; Empresa
+                        f) Funcion&aacute;rios e colaboradores que prestem servi&ccedil;os de forma direta &agrave;
+                        Empresa
                         Promotora (Crefaz);<br>
                         <br>
                         g) C&ocirc;njuges e pais (pai, m&atilde;e, filhos e irm&atilde;os) de funcion&aacute;rios e
-                        colaboradores que prestam servi&ccedil;os de forma direta &agrave; Empresa Promotora (Crefaz);<br>
+                        colaboradores que prestam servi&ccedil;os de forma direta &agrave; Empresa Promotora
+                        (Crefaz);<br>
                         <br>
                         h) Prestadores de servi&ccedil;o que prestam servi&ccedil;os de forma direta &agrave; Empresa
                         Promotora (Crefaz);<br>
@@ -1617,12 +1733,14 @@
                         <br>
                         divulga&ccedil;&atilde;o ou execu&ccedil;&atilde;o da presente promo&ccedil;&atilde;o.<br>
                         <br>
-                        12.2 Os participantes s&atilde;o integralmente respons&aacute;veis ​​pelas informa&ccedil;&otilde;es
+                        12.2 Os participantes s&atilde;o integralmente respons&aacute;veis ​​pelas
+                        informa&ccedil;&otilde;es
                         fornecidas em seus cadastros. Ser&atilde;o automaticamente<br>
                         <br>
                         desclassificados, sem necessidade de comunica&ccedil;&atilde;o pr&eacute;via, aqueles que:<br>
                         <br>
-                        a) informarem dados cadastrais incorretos, falsos, de terceiros, incompletos ou inconsistentes;<br>
+                        a) informarem dados cadastrais incorretos, falsos, de terceiros, incompletos ou
+                        inconsistentes;<br>
                         <br>
                         b) n&atilde;o observarem quaisquer regras deste regulamento, incluindo prazos de vig&ecirc;ncia,
                         compatibilidade entre cadastro e contrato celebrado;<br>
@@ -1636,15 +1754,21 @@
                         cab&iacute;veis.<br>
                         <br>
                         12.4 Os participantes poder&atilde;o ser desclassificados em caso de recusa formal,
-                        desist&ecirc;ncia de recebimento do pr&ecirc;mio e/ou aus&ecirc;ncia de apresenta&ccedil;&atilde;o
+                        desist&ecirc;ncia de recebimento do pr&ecirc;mio e/ou aus&ecirc;ncia de
+                        apresenta&ccedil;&atilde;o
                         da documenta&ccedil;&atilde;o relevante dentro do prazo estipulado pelo presente regulamento,
-                        hip&oacute;teses essas que n&atilde;o ensejar&atilde;o direito &nbsp;nem ao pr&ecirc;mio objeto de
-                        promo&ccedil;&atilde;o e nem qualquer outro direito, vantagem, indeniza&ccedil;&atilde;o de qualquer
+                        hip&oacute;teses essas que n&atilde;o ensejar&atilde;o direito &nbsp;nem ao pr&ecirc;mio objeto
+                        de
+                        promo&ccedil;&atilde;o e nem qualquer outro direito, vantagem, indeniza&ccedil;&atilde;o de
+                        qualquer
                         natureza.<br>
                         <br>
-                        12.5 O CREFAZ ter&aacute; a rela&ccedil;&atilde;o de todos os cadastros de participantes que tenham
-                        participa&ccedil;&atilde;o na presente promo&ccedil;&atilde;o de restaura&ccedil;&atilde;o. Caso,
-                        por &nbsp;qualquer motivo, qualquer n&uacute;mero da esp&eacute;cie seja gerado em favor de pessoas
+                        12.5 O CREFAZ ter&aacute; a rela&ccedil;&atilde;o de todos os cadastros de participantes que
+                        tenham
+                        participa&ccedil;&atilde;o na presente promo&ccedil;&atilde;o de restaura&ccedil;&atilde;o.
+                        Caso,
+                        por &nbsp;qualquer motivo, qualquer n&uacute;mero da esp&eacute;cie seja gerado em favor de
+                        pessoas
                         jur&iacute;dicas impedidas de participar, estes n&uacute;meros ser&atilde;o &nbsp;considerados
                         inv&aacute;lidos e n&atilde;o ter&atilde;o direito nem ao pr&ecirc;mio objeto de
                         promo&ccedil;&atilde;o e nem qualquer outro direito, vantagem, indeniza&ccedil;&atilde;o
@@ -1653,7 +1777,8 @@
                     <p>
                         N&uacute;mero da sorte contemplado:<br>
                         <br>
-                        12.6 A verifica&ccedil;&atilde;o com rela&ccedil;&atilde;o aos exclu&iacute;dos ser&aacute; feita
+                        12.6 A verifica&ccedil;&atilde;o com rela&ccedil;&atilde;o aos exclu&iacute;dos ser&aacute;
+                        feita
                         pela promotora, por ocasi&atilde;o do cadastro para participa&ccedil;&atilde;o da presente
                         promo&ccedil;&atilde;o, bem&nbsp;como na apura&ccedil;&atilde;o do resultado da
                         promo&ccedil;&atilde;o.<br>
@@ -1661,76 +1786,99 @@
                         12.7 Os participantes tamb&eacute;m n&atilde;o poder&atilde;o utilizar meios de
                         prote&ccedil;&atilde;o para receber n&uacute;meros da sorte para participar desta
                         promo&ccedil;&atilde;o e/ou&nbsp;que atentem contra os objetivos e condi&ccedil;&otilde;es de
-                        participa&ccedil;&atilde;o previstas neste Regulamento, situa&ccedil;&otilde;es essas que, quando
-                        especificadas, ser&atilde;o exceto como infra&ccedil;&atilde;o aos termos do presente Regulamento,
+                        participa&ccedil;&atilde;o previstas neste Regulamento, situa&ccedil;&otilde;es essas que,
+                        quando
+                        especificadas, ser&atilde;o exceto como infra&ccedil;&atilde;o aos termos do presente
+                        Regulamento,
                         ensejando o impedimento da participa&ccedil;&atilde;o e/ou o cancelamento imediato de sua
                         participa&ccedil;&atilde;o, sem preju&iacute;zo, ainda, das medidas cab&iacute;veis e/ou
                         a&ccedil;&atilde;o de regresso a ser promovida pela promotora em face do infrator.<br>
                         <br>
                         12.8 Os participantes ser&atilde;o exclu&iacute;dos automaticamente da promo&ccedil;&atilde;o em
-                        caso de fraude comprovada, podendo ainda responder civil e/ou penalmente por tais atos, inclusive
+                        caso de fraude comprovada, podendo ainda responder civil e/ou penalmente por tais atos,
+                        inclusive
                         por crime de falsidade ideol&oacute;gica ou documental.<br>
                         <br>
                         12.9 Caso n&atilde;o haja nenhum retorno do participante, ap&oacute;s um prazo de 5 (cinco) dias
-                        &uacute;teis de contato efetivo feito pela empresa promotora da campanha, o participante ser&aacute;
+                        &uacute;teis de contato efetivo feito pela empresa promotora da campanha, o participante
+                        ser&aacute;
                         desclassificado e um novo contemplado ser&aacute; selecionado de acordo com as regras deste
                         Regulamento.<br>
                         <br>
                         12.10 Em qualquer hip&oacute;tese de desclassifica&ccedil;&atilde;o do participante, a Promotora
-                        buscar&aacute; novo elemento sorte&aacute;vel, de acordo com os crit&eacute;rios de elegibilidade e
-                        com a Regra de Aproxima&ccedil;&atilde;o prevista neste Regulamento, sendo considerado contemplado o
+                        buscar&aacute; novo elemento sorte&aacute;vel, de acordo com os crit&eacute;rios de
+                        elegibilidade e
+                        com a Regra de Aproxima&ccedil;&atilde;o prevista neste Regulamento, sendo considerado
+                        contemplado o
                         participante que tiver cumprido todas as regras e condi&ccedil;&otilde;es de
                         participa&ccedil;&atilde;o previstas neste Regulamento.<br>
                         <br>
                         13 - FORMA DE DIVULGA&Ccedil;&Atilde;O DO RESULTADO:<br>
                         <br>
-                        13.1 O resultado da promo&ccedil;&atilde;o ser&aacute; divulgado no site site.crefaz.com.br/expoinga
-                        e no Instagram @crefazoficial at&eacute; o dia 26/05/2026, al&eacute;m de outras m&iacute;dias que a
+                        13.1 O resultado da promo&ccedil;&atilde;o ser&aacute; divulgado no site
+                        site.crefaz.com.br/expoinga
+                        e no Instagram @crefazoficial at&eacute; o dia 26/05/2026, al&eacute;m de outras m&iacute;dias
+                        que a
                         empresa promotora julgue conveniente.<br>
                         <br>
-                        13.2 Os participantes s&atilde;o respons&aacute;veis ​​por manter seus dados cadastrais atualizados
-                        junto &agrave; Empresa Promotora, sob pena de desclassifica&ccedil;&atilde;o por impossibilidade de
+                        13.2 Os participantes s&atilde;o respons&aacute;veis ​​por manter seus dados cadastrais
+                        atualizados
+                        junto &agrave; Empresa Promotora, sob pena de desclassifica&ccedil;&atilde;o por impossibilidade
+                        de
                         contato.<br>
                         <br>
-                        13.3 O nome do contemplado e seu n&uacute;mero do sortimento ficar&atilde;o dispon&iacute;veis para
-                        consulta no site da promo&ccedil;&atilde;o por 30 (trinta) dias, contados da data de &uacute;ltima
+                        13.3 O nome do contemplado e seu n&uacute;mero do sortimento ficar&atilde;o dispon&iacute;veis
+                        para
+                        consulta no site da promo&ccedil;&atilde;o por 30 (trinta) dias, contados da data de
+                        &uacute;ltima
                         apura&ccedil;&atilde;o.<br>
                         <br>
                         13.4 A divulga&ccedil;&atilde;o do nome dos contemplados na forma aqui referida, se faz em
                         cumprimento ao dever legal da promotora em informar (dar publicidade) o resultado da
                         promo&ccedil;&atilde;o e, assim o sendo, encontra amparo na LGPD &ndash; Lei Geral de
                         Prote&ccedil;&atilde;o de Dados. A n&atilde;o concord&acirc;ncia do interessado com a
-                        divulga&ccedil;&atilde;o aqui referida, implica na impossibilidade da sua participa&ccedil;&atilde;o
-                        nesta promo&ccedil;&atilde;o, aplicando-se automaticamente seu cancelamento/anula&ccedil;&atilde;o,
+                        divulga&ccedil;&atilde;o aqui referida, implica na impossibilidade da sua
+                        participa&ccedil;&atilde;o
+                        nesta promo&ccedil;&atilde;o, aplicando-se automaticamente seu
+                        cancelamento/anula&ccedil;&atilde;o,
                         nos termos deste regulamento.<br>
                         <br>
                         14 - ENTREGA DOS PR&Ecirc;MIOS:<br>
                         <br>
                         14.1 At&eacute; 10 (dez) dias corridos ap&oacute;s a apura&ccedil;&atilde;o, o participante
-                        contemplado ser&aacute; contatado para confirma&ccedil;&atilde;o de dados e envio de os documentos
+                        contemplado ser&aacute; contatado para confirma&ccedil;&atilde;o de dados e envio de os
+                        documentos
                         para a promotora e o pr&ecirc;mio ser&atilde;o entregues em at&eacute; 30 (trinta) dias corridos
                         contados dos dados da apura&ccedil;&atilde;o.<br>
                         <br>
-                        14.2 Os contatos ser&atilde;o feitos pelos meios informados pelo participante no cadastro realizado
-                        para participar da presente promo&ccedil;&atilde;o, preferencialmente por telefone, sendo certo que
+                        14.2 Os contatos ser&atilde;o feitos pelos meios informados pelo participante no cadastro
+                        realizado
+                        para participar da presente promo&ccedil;&atilde;o, preferencialmente por telefone, sendo certo
+                        que
                         a promotora n&atilde;o se responsabilizar&aacute; por dados cadastrais errados, incompletos e/ou
-                        desatualizados que possam ter sido fornecidos pelo pr&oacute;prio participante e que impe&ccedil;am
+                        desatualizados que possam ter sido fornecidos pelo pr&oacute;prio participante e que
+                        impe&ccedil;am
                         sua localiza&ccedil;&atilde;o.<br>
                         <br>
-                        14.3 A Empresa Promotora realizar&aacute; at&eacute; 3 (tr&ecirc;s) tentativas de contato com cada
+                        14.3 A Empresa Promotora realizar&aacute; at&eacute; 3 (tr&ecirc;s) tentativas de contato com
+                        cada
                         ganhador, em dias consecutivos, com intervalo m&iacute;nimo de 1 (um) dia entre uma tentativa e
                         outra. Caso ap&oacute;s a terceira tentativa n&atilde;o seja poss&iacute;vel localizar o
                         contemplado, este ser&aacute; desclassificado e o&nbsp;pr&ecirc;mio ser&aacute; entregue aos
-                        participantes subsequentemente, em conformidade com a regra de disposi&ccedil;&atilde;o prevista no
+                        participantes subsequentemente, em conformidade com a regra de disposi&ccedil;&atilde;o prevista
+                        no
                         regulamento.<br>
                         <br>
-                        14.4 O contemplado dever&aacute; encaminhar &agrave; promotora, conforme instru&ccedil;&otilde;es
+                        14.4 O contemplado dever&aacute; encaminhar &agrave; promotora, conforme
+                        instru&ccedil;&otilde;es
                         deste ao participante, alguns documentos para fim de validar a sua contempla&ccedil;&atilde;o na
                         fotografia: c&oacute;pia de documento de identidade (RG + CPF ou CNH) e comprovante de
                         endere&ccedil;o, a fim de se aferir o cumprimento das regras descritas neste regulamento.<br>
                         <br>
-                        14.5 O participante ter&aacute; o prazo de, no m&aacute;ximo, 5 (cinco) dias corridos, contados dos
-                        dados do primeiro contato efetivo da promotora consigo, para encaminhar a documenta&ccedil;&atilde;o
+                        14.5 O participante ter&aacute; o prazo de, no m&aacute;ximo, 5 (cinco) dias corridos, contados
+                        dos
+                        dados do primeiro contato efetivo da promotora consigo, para encaminhar a
+                        documenta&ccedil;&atilde;o
                         solicitada. Havendo falha no envio do documento, ser&aacute; concedido prazo adicional de 3
                         (tr&ecirc;s) dias &uacute;teis. Em n&atilde;o sendo cumprido o prazo, o participante ser&aacute;
                         desclassificado e um outro ser&aacute; contemplado em substitui&ccedil;&otilde;es deste,
@@ -1741,23 +1889,28 @@
                         pena de desclassifica&ccedil;&atilde;o.<br>
                         <br>
                         14.7 N&atilde;o ser&aacute; permitida a retirada de pr&ecirc;mios por terceiros, salvo com
-                        procura&ccedil;&atilde;o com firma autorizada e autoriza&ccedil;&atilde;o pr&eacute;via da Empresa
+                        procura&ccedil;&atilde;o com firma autorizada e autoriza&ccedil;&atilde;o pr&eacute;via da
+                        Empresa
                         Promotora.<br>
                         <br>
                         14.8 Preenchidos todos os requisitos desta promo&ccedil;&atilde;o, o pr&ecirc;mio ser&aacute;
-                        efetivamente entregue ao contemplado, livre e desembara&ccedil;ado de&nbsp;qualquer &ocirc;nus.<br>
+                        efetivamente entregue ao contemplado, livre e desembara&ccedil;ado de&nbsp;qualquer
+                        &ocirc;nus.<br>
                         <br>
-                        14.9 Em caso de atrasos nos tr&acirc;mites para entrega do pr&ecirc;mio, a Promotora se compromete a
+                        14.9 Em caso de atrasos nos tr&acirc;mites para entrega do pr&ecirc;mio, a Promotora se
+                        compromete a
                         informar ao contemplado as etapas do processo&nbsp;de entrega e mantenha-o atualizado sobre o
                         recebimento do pr&ecirc;mio.<br>
                         <br>
                         14.10 O pr&ecirc;mio &eacute; pessoal e intransfer&iacute;vel e n&atilde;o poder&aacute; ser
                         convertido em dinheiro, distribu&iacute;do ou trocado por outros bens.<br>
                         <br>
-                        14.11 Na eventualidade do participante ganhar um falecimento, o pr&ecirc;mio ser&aacute; entregue ao
+                        14.11 Na eventualidade do participante ganhar um falecimento, o pr&ecirc;mio ser&aacute;
+                        entregue ao
                         respectivo esp&oacute;lio, na pessoa do seu inventariante.<br>
                         <br>
-                        N&atilde;o havendo processo de invent&aacute;rio, ser&aacute; entregue aos herdeiros do contemplado,
+                        N&atilde;o havendo processo de invent&aacute;rio, ser&aacute; entregue aos herdeiros do
+                        contemplado,
                         desde que esta condi&ccedil;&atilde;o seja comprovadamente comprovada.<br>
                         <br>
                         15 - DISPOSI&Ccedil;&Otilde;ES GERAIS:<br>
@@ -1769,7 +1922,8 @@
                         Portaria n&ordm; 7.638/2022 da SEAE/ME e com o previsto neste regulamento.<br>
                         <br>
                         15.2 O sistema referido ser&aacute; devidamente auditado pela empresa de tecnologia de
-                        informa&ccedil;&atilde;o contratada especificamente para esse fim pela empresa promotora, sistema
+                        informa&ccedil;&atilde;o contratada especificamente para esse fim pela empresa promotora,
+                        sistema
                         esse que possui arquitetura de conting&ecirc;ncia, permitindo o cadastro e a emiss&atilde;o de
                         n&uacute;meros da sorte ainda que&nbsp;ocorram oscila&ccedil;&otilde;es.
                     </p>
@@ -1780,26 +1934,35 @@
                         per&iacute;odo da promo&ccedil;&atilde;o at&eacute; a homologa&ccedil;&atilde;o da
                         Presta&ccedil;&atilde;o de Contas.<br>
                         <br>
-                        15.4 Caso todos os n&uacute;meros da sorte sejam distribu&iacute;dos antes das 22:00 (Hor&aacute;rio
+                        15.4 Caso todos os n&uacute;meros da sorte sejam distribu&iacute;dos antes das 22:00
+                        (Hor&aacute;rio
                         de Bras&iacute;lia) do dia 17/05/2026 &ndash; t&eacute;rmino do per&iacute;odo de
                         participa&ccedil;&atilde;o &ndash; a participa&ccedil;&atilde;o ser&aacute; tida como encerrada,
                         sendo tal fato amplamente comunicado a todos pelos mesmos meios utilizados para a
                         divulga&ccedil;&atilde;o desta promo&ccedil;&atilde;o.<br>
                         <br>
-                        15.5 Caber&aacute; a cada participante atender a todas as regras definidas neste Regulamento e, caso
+                        15.5 Caber&aacute; a cada participante atender a todas as regras definidas neste Regulamento e,
+                        caso
                         n&atilde;o sejam cumpridas corretamente, impedir&atilde;o a participa&ccedil;&atilde;o e
                         contempla&ccedil;&atilde;o nesta promo&ccedil;&atilde;o.<br>
                         <br>
-                        15.6 Caso, por qualquer motivo, qualquer n&uacute;mero da sorte seja distribu&iacute;do em favor de
-                        pessoas impedidas de concorrer, ele ser&aacute; desconsiderado e n&atilde;o ensejar&aacute; direito
-                        nem ao pr&ecirc;mio objeto desta promo&ccedil;&atilde;o e nem a qualquer outro direito, vantagem ou
+                        15.6 Caso, por qualquer motivo, qualquer n&uacute;mero da sorte seja distribu&iacute;do em favor
+                        de
+                        pessoas impedidas de concorrer, ele ser&aacute; desconsiderado e n&atilde;o ensejar&aacute;
+                        direito
+                        nem ao pr&ecirc;mio objeto desta promo&ccedil;&atilde;o e nem a qualquer outro direito, vantagem
+                        ou
                         indeniza&ccedil;&atilde;o de qualquer natureza, procedendo-se, em seguida, &agrave;
                         apura&ccedil;&atilde;o de um novo n&uacute;mero da sorte.<br>
                         <br>
-                        15.7 A apura&ccedil;&atilde;o dos n&uacute;meros da sorte contemplados e seus respectivos portadores
-                        se dar&aacute; com base no resultado da extra&ccedil;&atilde;o da Loteria Federal do dia 23/05/2026,
-                        de acordo com o item 11 do presente regulamento. Se a extra&ccedil;&atilde;o da Loteria Federal for
-                        cancelada, por qualquer motivo, prevalecer&aacute;, para fins de premia&ccedil;&atilde;o, a primeira
+                        15.7 A apura&ccedil;&atilde;o dos n&uacute;meros da sorte contemplados e seus respectivos
+                        portadores
+                        se dar&aacute; com base no resultado da extra&ccedil;&atilde;o da Loteria Federal do dia
+                        23/05/2026,
+                        de acordo com o item 11 do presente regulamento. Se a extra&ccedil;&atilde;o da Loteria Federal
+                        for
+                        cancelada, por qualquer motivo, prevalecer&aacute;, para fins de premia&ccedil;&atilde;o, a
+                        primeira
                         extra&ccedil;&atilde;o da Loteria Federal posterior que vier a ocorrer.<br>
                         <br>
                         15.8 A Empresa dever&aacute; encaminhar &agrave; SPA a Lista de Participantes, anexando na aba
@@ -1808,12 +1971,14 @@
                         participa&ccedil;&atilde;o e antes da extra&ccedil;&atilde;o da Loteria.
                     </p>
                     <p>
-                        15.9 O direito ao pr&ecirc;mio &eacute; pessoal e intransfer&iacute;vel e em hip&oacute;tese alguma
+                        15.9 O direito ao pr&ecirc;mio &eacute; pessoal e intransfer&iacute;vel e em hip&oacute;tese
+                        alguma
                         o ganhador ter&aacute; direito, sob qualquer alega&ccedil;&atilde;o, a pedir sua troca ou
                         substitui&ccedil;&atilde;o de qualquer detalhe que n&atilde;o sejam os determinados na
                         descri&ccedil;&atilde;o do pr&ecirc;mio.<br>
                         <br>
-                        15.10 A responsabilidade da CREFAZ, junto ao participante ganhador, se encerra no momento da entrega
+                        15.10 A responsabilidade da CREFAZ, junto ao participante ganhador, se encerra no momento da
+                        entrega
                         dos pr&ecirc;mios, ficando tal pessoa respons&aacute;vel por requisitar o direito de garantia do
                         pr&ecirc;mio junto ao fornecedor, em caso de problemas, assim como qualquer acidente ou dano
                         decorrente da utiliza&ccedil;&atilde;o do pr&ecirc;mio concedido na presente
@@ -1824,20 +1989,27 @@
                         Pr&ecirc;mios e Apostas do Minist&eacute;rio da Fazenda.<br>
                         <br>
                         15.12 As d&uacute;vidas, omiss&otilde;es ou controv&eacute;rsias oriundas dessa
-                        Promo&ccedil;&atilde;o ser&atilde;o dirimidas pela CREFAZ. Caso n&atilde;o se alcance um consenso
-                        ap&oacute;s a atua&ccedil;&atilde;o da comiss&atilde;o, a quest&atilde;o poder&aacute; ser submetida
+                        Promo&ccedil;&atilde;o ser&atilde;o dirimidas pela CREFAZ. Caso n&atilde;o se alcance um
+                        consenso
+                        ap&oacute;s a atua&ccedil;&atilde;o da comiss&atilde;o, a quest&atilde;o poder&aacute; ser
+                        submetida
                         &agrave; aprecia&ccedil;&atilde;o da SPA/MF &ndash; Secretaria de Pr&ecirc;mios e Apostas do
                         Minist&eacute;rio da Fazenda.<br>
                         <br>
                         15.13 Quaisquer reclama&ccedil;&otilde;es dos participantes dever&atilde;o ser encaminhadas
-                        atrav&eacute;s do e-mail expoinga@crefaz.com.br. Al&eacute;m disso, os &oacute;rg&atilde;os locais
+                        atrav&eacute;s do e-mail expoinga@crefaz.com.br. Al&eacute;m disso, os &oacute;rg&atilde;os
+                        locais
                         de defesa do consumidor receber&atilde;o as reclama&ccedil;&otilde;es desde que devidamente
                         fundamentadas.<br>
                         <br>
-                        15.14 A promo&ccedil;&atilde;o &ldquo;Crefaz na Expoing&aacute;&rdquo;, assim como seu regulamento,
-                        poder&atilde;o ser alterados, suspensos e/ou cancelados, pela CREFAZ, por motivos de for&ccedil;a
-                        maior e/ou caso fortuito, que venham a comprometer o regular andamento da promo&ccedil;&atilde;o,
-                        mediante autoriza&ccedil;&atilde;o pr&eacute;via da SPA/MF - SECRETARIA DE PR&Ecirc;MIOS E APOSTAS
+                        15.14 A promo&ccedil;&atilde;o &ldquo;Crefaz na Expoing&aacute;&rdquo;, assim como seu
+                        regulamento,
+                        poder&atilde;o ser alterados, suspensos e/ou cancelados, pela CREFAZ, por motivos de
+                        for&ccedil;a
+                        maior e/ou caso fortuito, que venham a comprometer o regular andamento da
+                        promo&ccedil;&atilde;o,
+                        mediante autoriza&ccedil;&atilde;o pr&eacute;via da SPA/MF - SECRETARIA DE PR&Ecirc;MIOS E
+                        APOSTAS
                         DO MINIST&Eacute;RIO DA FAZENDA
                     </p>
                     <p>
@@ -1847,19 +2019,22 @@
                         promo&ccedil;&atilde;o, e, em caso de diverg&ecirc;ncia de interpreta&ccedil;&otilde;es, sempre
                         considerar-se-&aacute; v&aacute;lido o conte&uacute;do dos itens 1 a 15 e seus subitens.<br>
                         <br>
-                        15.16 Fica eleito o foro do participante, como competente para dirimir as quest&otilde;es oriundas
+                        15.16 Fica eleito o foro do participante, como competente para dirimir as quest&otilde;es
+                        oriundas
                         desta promo&ccedil;&atilde;o.<br>
                         <br>
                         16 - TERMO DE RESPONSABILIDADE<br>
                         <br>
-                        N&atilde;o poder&atilde;o ser objeto de promo&ccedil;&atilde;o, mediante distribui&ccedil;&atilde;o
+                        N&atilde;o poder&atilde;o ser objeto de promo&ccedil;&atilde;o, mediante
+                        distribui&ccedil;&atilde;o
                         de pr&ecirc;mios, na forma deste Regulamento: Medicamentos; Armas e muni&ccedil;&otilde;es,
                         explosivos, fogos de artif&iacute;cio ou de estampido, bebidas alco&oacute;licas, fumo e seus
                         derivados; Outros produtos que venham a ser relacionados pelo Ministro da Fazenda. Consideram-se
                         bebidas alco&oacute;licas, para efeito deste decreto, as bebidas pot&aacute;veis com teor
                         alco&oacute;lico superior a treze graus Gay-Lussac (13^GL)&nbsp;.<br>
                         <br>
-                        Poder&aacute; participar da promo&ccedil;&atilde;o qualquer consumidor que preencha os requisitos
+                        Poder&aacute; participar da promo&ccedil;&atilde;o qualquer consumidor que preencha os
+                        requisitos
                         estipulados no regulamento da campanha autorizada;<br>
                         <br>
                         Os pr&ecirc;mios n&atilde;o poder&atilde;o ser convertidos em dinheiro;<br>
@@ -1868,9 +2043,12 @@
                         <br>
                         Os pr&ecirc;mios ser&atilde;o entregues em at&eacute; 30 dias da data da
                         apura&ccedil;&atilde;o/sorteio, sem qualquer &ocirc;nus aos contemplados Quando o pr&ecirc;mio
-                        sorteado, ganho em concurso ou conferido mediante vale-brinde, n&atilde;o for reclamado no prazo de
-                        cento e oitenta (180) dias, contados, respectivamente, da data do sorteio, da apura&ccedil;&atilde;o
-                        do resultado do concurso ou do t&eacute;rmino do prazo da promo&ccedil;&atilde;o, caducar&aacute; o
+                        sorteado, ganho em concurso ou conferido mediante vale-brinde, n&atilde;o for reclamado no prazo
+                        de
+                        cento e oitenta (180) dias, contados, respectivamente, da data do sorteio, da
+                        apura&ccedil;&atilde;o
+                        do resultado do concurso ou do t&eacute;rmino do prazo da promo&ccedil;&atilde;o,
+                        caducar&aacute; o
                         direito do respectivo titular e o valor correspondente ser&aacute; recolhido, pela empresa
                         autorizada, ao Tesouro Nacional, como renda da Uni&atilde;o, no prazo de quarenta e cinco (45)
                         dias;<br>
@@ -1879,7 +2057,8 @@
                         contemplado, dever&aacute;, no ato da entrega do pr&ecirc;mio, ser representado por seu
                         respons&aacute;vel legal; &agrave; exce&ccedil;&atilde;o das promo&ccedil;&otilde;es comerciais
                         realizadas por concession&aacute;ria ou permission&aacute;ria de servi&ccedil;o de
-                        radiodifus&atilde;o, nos termos do artigo 1&ordm;-A, &sect; 3&ordm;, da Lei 5.768, de 20 de dezembro
+                        radiodifus&atilde;o, nos termos do artigo 1&ordm;-A, &sect; 3&ordm;, da Lei 5.768, de 20 de
+                        dezembro
                         de 1971;
                     </p>
                     <p>
@@ -1890,79 +2069,93 @@
                         ser&atilde;o, primeiramente, dirimidas pela promotora, persistindo-as, estas dever&atilde;o ser
                         submetidas &agrave; SPA/MF;<br>
                         <br>
-                        Os &oacute;rg&atilde;os locais de defesa do consumidor receber&atilde;o as reclama&ccedil;&otilde;es
+                        Os &oacute;rg&atilde;os locais de defesa do consumidor receber&atilde;o as
+                        reclama&ccedil;&otilde;es
                         devidamente fundamentadas;<br>
                         A presta&ccedil;&atilde;o de contas dever&aacute; ser realizada no prazo m&aacute;ximo de trinta
                         dias ap&oacute;s a data de prescri&ccedil;&atilde;o dos pr&ecirc;mios sob pena
                         de&nbsp;descumprimento do plano de distribui&ccedil;&atilde;o de pr&ecirc;mios;
                     </p>
                     <p>
-                        O regulamento dever&aacute; ser afixado em lugar de ampla visibilidade e se apresentar em tamanho e
-                        em grafia que viabilizem a compreens&atilde;o e visualiza&ccedil;&atilde;o por parte do consumidor
+                        O regulamento dever&aacute; ser afixado em lugar de ampla visibilidade e se apresentar em
+                        tamanho e
+                        em grafia que viabilizem a compreens&atilde;o e visualiza&ccedil;&atilde;o por parte do
+                        consumidor
                         participante da promo&ccedil;&atilde;o comercial;<br>
                         <br>
-                        Al&eacute;m dos termos acima, a promo&ccedil;&atilde;o comercial dever&aacute; obedecer &agrave;s
-                        condi&ccedil;&otilde;es previstas na Lei n&ordm; 5.768, de 1971, no Decreto n&ordm; 70.951, de 1972,
-                        Portaria SEAE n&ordm; 7.638, de 2022, Portaria MF n&ordm; 67, de 2017, Portaria SECAP n&ordm; 20.749
+                        Al&eacute;m dos termos acima, a promo&ccedil;&atilde;o comercial dever&aacute; obedecer
+                        &agrave;s
+                        condi&ccedil;&otilde;es previstas na Lei n&ordm; 5.768, de 1971, no Decreto n&ordm; 70.951, de
+                        1972,
+                        Portaria SEAE n&ordm; 7.638, de 2022, Portaria MF n&ordm; 67, de 2017, Portaria SECAP n&ordm;
+                        20.749
                         de 2020, e em atos que as complementarem.<br>
                         <br>
-                        Para as modalidades &quot;Sorteio&quot; e &quot;Assemelhada a Sorteio&quot; a empresa dever&aacute;
+                        Para as modalidades &quot;Sorteio&quot; e &quot;Assemelhada a Sorteio&quot; a empresa
+                        dever&aacute;
                         anexar a Lista de Participantes na aba &quot;Apura&ccedil;&otilde;es&quot;, contendo nomes e
-                        n&uacute;meros da sorte distribu&iacute;dos, ap&oacute;s o t&eacute;rmino de cada per&iacute;odo de
-                        participa&ccedil;&atilde;o e antes da extra&ccedil;&atilde;o da Loteria. O arquivo dever&aacute; ser
+                        n&uacute;meros da sorte distribu&iacute;dos, ap&oacute;s o t&eacute;rmino de cada per&iacute;odo
+                        de
+                        participa&ccedil;&atilde;o e antes da extra&ccedil;&atilde;o da Loteria. O arquivo dever&aacute;
+                        ser
                         no formato .csv, .xls ou .zip e cada arquivo poder&aacute; ter at&eacute; 250 MB.<br>
                         <br>
                         A infring&ecirc;ncia &agrave;s cl&aacute;usulas do Termo de Responsabilidade e do Regulamento
-                        constituem descumprimento do plano de opera&ccedil;&atilde;o e ensejam as penalidade previstas no
+                        constituem descumprimento do plano de opera&ccedil;&atilde;o e ensejam as penalidade previstas
+                        no
                         artigo 13 da Lei n&ordm;. 5.768, de 1971.<br>
                         <br>
-                        <img alt="" data-assetid="63186" src="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/ff9ebe10-2e71-4c3e-8670-a16fe4d6dc2b.png" style="padding: 0px; text-align: center; border: 0px solid transparent; height: auto; width: 100%;" width="1254">
+                        <img alt="" data-assetid="63186"
+                            src="https://image.parceiros.crefaz.com.br/lib/fe3711737164057b751772/m/1/ff9ebe10-2e71-4c3e-8670-a16fe4d6dc2b.png"
+                            style="padding: 0px; text-align: center; border: 0px solid transparent; height: auto; width: 100%;"
+                            width="1254">
                     </p>
                 </div>
                 <div class="modal-actions">
-                    <!-- <button type="button" class="btn btn-primary" id="rejectLgpd">Eu não aceito</button> --><button class="btn btn-secondary" id="acceptLgpd" type="button">Concordo</button>
+                    <!-- <button type="button" class="btn btn-primary" id="rejectLgpd">Eu não aceito</button> --><button
+                        class="btn btn-secondary" id="acceptLgpd" type="button">Concordo</button>
                 </div>
             </div><!-- Script Modal -->
             <script>
                 const checkbox = document.getElementById("lgpd");
                 const error = document.getElementById("lgpdError");
                 const mark = document.querySelector(".check-mark");
-    
+
                 const openRegulamento = document.getElementById("openRegulamento");
                 const modal = document.getElementById("regulamentoModal");
                 const closeModal = document.getElementById("closeModal");
                 const acceptLgpd = document.getElementById("acceptLgpd");
                 const rejectLgpd = document.getElementById("rejectLgpd");
-    
+
                 function showError() {
                     if (error) error.style.display = "block";
                     if (mark) mark.classList.add("error");
                 }
-    
+
                 function hideError() {
                     if (error) error.style.display = "none";
                     if (mark) mark.classList.remove("error");
                 }
-    
+
                 function openRegulamentoModal(event) {
                     event.preventDefault();
                     modal.classList.add("show");
                     modal.setAttribute("aria-hidden", "false");
                 }
-    
+
                 function hideRegulamentoModal() {
                     modal.classList.remove("show");
                     modal.setAttribute("aria-hidden", "true");
                 }
-    
+
                 if (openRegulamento) {
                     openRegulamento.addEventListener("click", openRegulamentoModal);
                 }
-    
+
                 if (closeModal) {
                     closeModal.addEventListener("click", hideRegulamentoModal);
                 }
-    
+
                 if (acceptLgpd) {
                     acceptLgpd.addEventListener("click", function () {
                         checkbox.checked = true;
@@ -1977,7 +2170,7 @@
                         hideRegulamentoModal();
                     });
                 }
-    
+
                 if (checkbox) {
                     checkbox.addEventListener("change", function () {
                         if (checkbox.checked) {
@@ -1985,7 +2178,7 @@
                         }
                     });
                 }
-    
+
                 if (modal) {
                     modal.addEventListener("click", function (event) {
                         if (event.target === modal) {
@@ -1993,7 +2186,7 @@
                         }
                     });
                 }
-    
+
                 document.addEventListener("keydown", function (event) {
                     if (event.key === "Escape" && modal.classList.contains("show")) {
                         hideRegulamentoModal();
@@ -2001,7 +2194,7 @@
                 });
             </script>
         </div>
-        
+
     </section>
 
     <!-- MODALS -->
